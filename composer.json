@@ -1,0 +1,20 @@
+{
+  "name": "FiremonPHP/manager",
+  "description": "This lib provides access way to manager mongodb",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Marcos Dantas",
+      "email": "marcos.adantas@hotmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "FiremonPHP\\Manager\\": "src/"
+    }
+  },
+  "require": {
+    "mongodb/mongodb": "^1.2@dev"
+  }
+}
