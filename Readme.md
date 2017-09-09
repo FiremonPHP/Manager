@@ -22,16 +22,18 @@ $manager = \FiremonPHP\Connection\Configuration::get(string $name = 'default');
 <?php
 find(string $collection, array $conditons):FindQuery
 ```
+
 ##### Write data
 ```
 <?php
 insert(string $collection, array $data):void
 
 ```
+
 ```
 <?php
 update(string $collection, array $data):UpdateQuery
-
+```
 ```
 <?php
 delete(string $collection):DeleteQuery
