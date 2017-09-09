@@ -21,6 +21,25 @@ class DuplicateKeyException
         $this->setIndex($cropedMessage);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getIndex()
+    {
+        return $this->index;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param string $message
+     */
     private function setValue(string $message)
     {
         $matches = [];
@@ -28,6 +47,9 @@ class DuplicateKeyException
         $this->value = $matches[1];
     }
 
+    /**
+     * @param string $message
+     */
     private function setIndex(string  $message)
     {
         $matches = [];
