@@ -40,30 +40,49 @@ class FindQuery extends ConditionsExpression
         return $this;
     }
 
+    /**
+     * @param string $fieldName
+     * @return $this
+     */
     public function ascBy(string $fieldName)
     {
         $this->_options['sort'][$fieldName] = '1';
         return $this;
     }
 
+    /**
+     * @param string $fieldName
+     * @return $this
+     */
     public function descBy(string $fieldName)
     {
         $this->_options['sort'][$fieldName] = '-1';
         return $this;
     }
 
+    /**
+     * @param int $limitNumber
+     * @return $this
+     */
     public function limit(int $limitNumber)
     {
         $this->_options['limit'] = $limitNumber;
         return $this;
     }
 
+    /**
+     * @param int $skipNumber
+     * @return $this
+     */
     public function skip(int $skipNumber)
     {
         $this->_options['skip'] = $skipNumber;
         return $this;
     }
 
+    /**
+     * @return \MongoDB\Driver\Cursor
+     */
     public function execute()
     {
         $query = new Query($this->_conditions, $this->_options);
