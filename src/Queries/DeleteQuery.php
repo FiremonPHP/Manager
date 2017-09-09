@@ -23,6 +23,15 @@ class DeleteQuery
     public function __construct(\MongoDB\Driver\BulkWrite $bulk)
     {
         $this->_bulk = $bulk;
+        $this->_conditions = new ConditionsExpression();
+    }
+
+    /**
+     * @return ConditionsExpression
+     */
+    public function conditions()
+    {
+        return $this->_conditions;
     }
 
     /**
