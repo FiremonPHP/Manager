@@ -5,16 +5,13 @@ use FiremonPHP\Manager\Expression\ConditionsExpression;
 use FiremonPHP\Manager\Manager;
 use MongoDB\Driver\Query;
 
-class FindQuery
+class FindQuery extends ConditionsExpression
 {
     /**
      * @var Manager
      */
     private $_manger;
-    /**
-     * @var
-     */
-    private $_conditions;
+
     /**
      * @var array
      */
@@ -27,7 +24,6 @@ class FindQuery
     public function __construct(string $collectionName, Manager $manager)
     {
         $this->_manger = $manager;
-        $this->_conditions = new ConditionsExpression();
         $this->collectionName = $collectionName;
     }
 
@@ -68,14 +64,9 @@ class FindQuery
         return $this;
     }
 
-    public function where()
-    {
-        return $this->_conditions;
-    }
-
     public function execute()
     {
-        $query = new Query((array)$this->_conditions, $this->_options);
+        $query = new Query($this->_conditions, $this->_options);
         return $this->_manger->execute(
             $this->collectionName,
             $query

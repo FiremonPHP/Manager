@@ -4,13 +4,8 @@ namespace FiremonPHP\Manager\Queries;
 
 use FiremonPHP\Manager\Expression\ConditionsExpression;
 
-class DeleteQuery
+class DeleteQuery extends ConditionsExpression
 {
-    /**
-     * @var ConditionsExpression
-     */
-    private $_conditions;
-
     private $_options = [
         'limit' => false
     ];
@@ -23,15 +18,6 @@ class DeleteQuery
     public function __construct(\MongoDB\Driver\BulkWrite $bulk)
     {
         $this->_bulk = $bulk;
-        $this->_conditions = new ConditionsExpression();
-    }
-
-    /**
-     * @return ConditionsExpression
-     */
-    public function conditions()
-    {
-        return $this->_conditions;
     }
 
     /**
@@ -49,6 +35,6 @@ class DeleteQuery
      */
     public function persist()
     {
-        $this->_bulk->delete((array)$this->_conditions, $this->_options);
+        $this->_bulk->delete($this->_conditions, $this->_options);
     }
 }

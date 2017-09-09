@@ -4,9 +4,8 @@ namespace FiremonPHP\Manager\Queries;
 
 use FiremonPHP\Manager\Expression\ConditionsExpression;
 
-class UpdateQuery
+class UpdateQuery extends ConditionsExpression
 {
-    private $_conditions;
     private $_options = [];
     private $_data;
 
@@ -18,16 +17,7 @@ class UpdateQuery
     public function __construct(array $data, $bulk)
     {
         $this->_data = $data;
-        $this->bulk = &$bulk;
-        $this->_conditions = new ConditionsExpression();
-    }
-
-    /**
-     * @return ConditionsExpression
-     */
-    public function conditions()
-    {
-        return $this->_conditions;
+        $this->bulk = $bulk;
     }
 
     /**
@@ -55,6 +45,6 @@ class UpdateQuery
      */
     public function persist()
     {
-        $this->bulk->update((array)$this->_conditions, ['$set' => $this->_data], $this->_options);
+        $this->bulk->update($this->_conditions, ['$set' => $this->_data], $this->_options);
     }
 }

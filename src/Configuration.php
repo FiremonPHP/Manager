@@ -1,8 +1,6 @@
 <?php
-namespace FiremonPHP\Manager\Connection;
+namespace FiremonPHP\Manager;
 
-
-use FiremonPHP\Manager\Manager;
 
 class Configuration
 {
