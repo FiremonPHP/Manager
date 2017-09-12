@@ -51,11 +51,11 @@ class Manager
             return $cursor;
         }
 
-        $self = $this;
-        array_walk($this->_bulks, function(BulkWrite $write, $collectionName) use(&$self) {
-            $self->writeResults[$collectionName] = $self->_manager->executeBulkWrite($self->_alias.'.'.$collectionName, $write);
-        });
-        return $self->writeResults;
+        foreach ($this->_bulks as $collectionName => $write) {
+            $this->writeResults[$collectionName] = $this->_manager->executeBulkWrite($this->_alias.'.'.$collectionName, $write);
+            unset($this->_bulks[$collectionName]);
+        }
+        return $this->writeResults;
     }
 
     /**
@@ -69,6 +69,14 @@ class Manager
             $data,
             $this->getWrites($collection)
         );
+    }
+
+    /**
+     * @return \MongoDB\Driver\Manager
+     */
+    public function getMongoManager()
+    {
+        return $this->_manager;
     }
 
     /**
