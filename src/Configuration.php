@@ -46,7 +46,7 @@ class Configuration
      * @param string $name
      * @return string
      */
-    public function getDatabaseName(string $name = 'default')
+    public static function getDatabaseName(string $name = 'default')
     {
         return self::$_databases[$name];
     }
