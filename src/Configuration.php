@@ -8,6 +8,10 @@ class Configuration
      * @var Manager[]
      */
     private static $_managers = [];
+    /**
+     * @var array
+     */
+    private static $_databases = [];
 
     public static function set(string $name, array $configs)
     {
@@ -21,6 +25,7 @@ class Configuration
 
         $mongoManager = new \MongoDB\Driver\Manager($configs['url']);
         self::$_managers[$name] = new Manager($mongoManager, $configs['database']);
+        self::$_databases[$name] = $configs['database'];
     }
 
     /**
@@ -36,4 +41,14 @@ class Configuration
 
         throw new \ErrorException('The connection: "'.$name.'" not configured!');
     }
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function getDatabaseName(string $name = 'default')
+    {
+        return self::$_databases[$name];
+    }
+
 }
